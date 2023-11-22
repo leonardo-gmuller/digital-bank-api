@@ -1,13 +1,14 @@
 package models
 
 import (
+	// "github.com/LeonardoMuller13/digital-bank-api/models"
 	"gorm.io/gorm"
 )
 
 type Transfer struct {
 	gorm.Model
-	Account_Origin_ID      int
-	Account_Destination_ID int
+	Account_origin_ID      int
+	Account_destination_ID int
 	Amount                 int
 }
 
