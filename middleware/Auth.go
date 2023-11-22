@@ -7,7 +7,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var secretKey = []byte("secret-key")
+var secretKey = []byte("my_secret_key")
 
 func ProtectedHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +26,6 @@ func ProtectedHandler(next http.Handler) http.Handler {
 			fmt.Fprint(w, "Invalid token")
 			return
 		}
-
-		fmt.Fprint(w, "Welcome to the the protected area")
 		next.ServeHTTP(w, r)
 	})
 }
@@ -36,7 +34,6 @@ func verifyToken(tokenString string) error {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})
-
 	if err != nil {
 		return err
 	}
