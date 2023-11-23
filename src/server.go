@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/database"
-	"github.com/LeonardoMuller13/digital-bank-api/routes"
+	"github.com/LeonardoMuller13/digital-bank-api/src/database"
+	"github.com/LeonardoMuller13/digital-bank-api/src/routes"
 )
 
 func main() {

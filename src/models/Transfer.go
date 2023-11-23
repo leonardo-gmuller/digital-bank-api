@@ -1,7 +1,7 @@
 package models
 
 import (
-	// "github.com/LeonardoMuller13/digital-bank-api/models"
+	// "github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"gorm.io/gorm"
 )
 

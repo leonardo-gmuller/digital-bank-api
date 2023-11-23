@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/LeonardoMuller13/digital-bank-api/controllers"
-	"github.com/LeonardoMuller13/digital-bank-api/middleware"
+	"github.com/LeonardoMuller13/digital-bank-api/src/controllers"
+	"github.com/LeonardoMuller13/digital-bank-api/src/middleware"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )

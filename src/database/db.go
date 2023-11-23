@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/LeonardoMuller13/digital-bank-api/models"
+	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

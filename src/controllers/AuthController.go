@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/LeonardoMuller13/digital-bank-api/database"
-	"github.com/LeonardoMuller13/digital-bank-api/models"
+	"github.com/LeonardoMuller13/digital-bank-api/src/database"
+	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"github.com/bitly/go-simplejson"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
