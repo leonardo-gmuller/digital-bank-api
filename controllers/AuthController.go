@@ -36,10 +36,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	if err = bcrypt.CompareHashAndPassword([]byte(account.Secret), []byte(creds.Password)); err != nil {
+	if err = bcrypt.CompareHashAndPassword([]byte(account.GetPassword()), []byte(creds.Password)); err != nil {
 		// If the two passwords don't match, return a 401 status
 		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Println(creds.Password)
 		fmt.Errorf("Nao autorizado")
 		return
 	}

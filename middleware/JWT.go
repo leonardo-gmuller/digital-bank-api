@@ -1,9 +1,12 @@
 package middleware
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 
+	"github.com/LeonardoMuller13/digital-bank-api/database"
+	"github.com/LeonardoMuller13/digital-bank-api/models"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -20,27 +23,39 @@ func ProtectedHandler(next http.Handler) http.Handler {
 		}
 		tokenString = tokenString[len("Bearer "):]
 
-		err := verifyToken(tokenString)
+		err, claims := verifyToken(tokenString)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
 			fmt.Fprint(w, "Invalid token")
 			return
 		}
+		if claims != nil {
+			if r.Context().Value("account") == nil {
+				account := &models.Account{}
+				result := database.DB.First(&account, "cpf = ?", claims["username"])
+				if result.Error != nil {
+					// If there is an issue with the database, return a 500 error
+					w.WriteHeader(http.StatusInternalServerError)
+					return
+				}
+				r = r.WithContext(context.WithValue(r.Context(), "account", account))
+			}
+		}
 		next.ServeHTTP(w, r)
 	})
 }
 
-func verifyToken(tokenString string) error {
+func verifyToken(tokenString string) (error, jwt.MapClaims) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})
 	if err != nil {
-		return err
+		return err, nil
 	}
 
 	if !token.Valid {
-		return fmt.Errorf("invalid token")
+		return fmt.Errorf("Invalid token"), nil
 	}
-
-	return nil
+	claims := token.Claims.(jwt.MapClaims)
+	return nil, claims
 }

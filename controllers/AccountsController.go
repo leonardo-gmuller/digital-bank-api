@@ -3,12 +3,17 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
-	"time"
 
 	"github.com/LeonardoMuller13/digital-bank-api/database"
 	"github.com/LeonardoMuller13/digital-bank-api/models"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/gorilla/mux"
 )
+
+type RequestNewAccount struct {
+	Name   string
+	Cpf    string
+	Secret string
+}
 
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
 	var ac []models.Account
@@ -18,16 +23,20 @@ func GetAccounts(w http.ResponseWriter, r *http.Request) {
 
 func NewAccount(w http.ResponseWriter, r *http.Request) {
 	var account models.Account
-	json.NewDecoder(r.Body).Decode(&account)
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(account.Secret), 8)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-	account.Secret = string(hashedPassword)
-	account.Balance = 0
-	account.CreatedAt = time.Now()
+	var creds RequestNewAccount
+	json.NewDecoder(r.Body).Decode(&creds)
 
+	account.Name = creds.Name
+	account.Cpf = creds.Cpf
+	account.SetPassword(creds.Secret)
 	database.DB.Create(&account)
 	json.NewEncoder(w).Encode(account)
+}
+
+func GetAccountBalanceByID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["account_id"]
+	var a models.Account
+	database.DB.First(&a, id)
+	json.NewEncoder(w).Encode(a.GetBalance())
 }
