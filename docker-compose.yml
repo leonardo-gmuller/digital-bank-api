@@ -1,15 +1,18 @@
 version: '3'
 services:
-  postgres:
+  postgresdb:
     image: "postgres"
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root      
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}      
     ports:
-      - "5432:5432"
+      - "1234:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data  
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - digital-bank  
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -19,4 +22,26 @@ services:
     ports:
       - "54321:80"
     depends_on:
-      - postgres
+      - postgresdb
+  api:
+    tty: true
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresdb
+    networks:
+      - digital-bank
+    restart: on-failure
+
+networks:
+  digital-bank:
+    driver: bridge

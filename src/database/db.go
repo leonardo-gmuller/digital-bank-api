@@ -2,6 +2,7 @@ package database
 
 import (
 	"log"
+	"os"
 
 	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"gorm.io/driver/postgres"
@@ -14,7 +15,7 @@ var (
 )
 
 func ConnectDB() {
-	stringDeConexao := "host=localhost user=root password=root dbname=root port=5432 sslmode=disable"
+	stringDeConexao := "host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") + " password=" + os.Getenv("DB_PASSWORD") + " dbname=" + os.Getenv("DB_NAME") + " port=" + os.Getenv("DB_PORT") + " sslmode=disable"
 	DB, err = gorm.Open(postgres.Open(stringDeConexao))
 
 	if err != nil {
