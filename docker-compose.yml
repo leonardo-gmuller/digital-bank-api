@@ -2,6 +2,8 @@ version: '3'
 services:
   postgresdb:
     image: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -37,7 +39,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - postgresdb
+      postgresdb:
+        condition: service_healthy
     networks:
       - digital-bank
     restart: on-failure
