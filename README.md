@@ -36,5 +36,5 @@ This is a basic API that performs transactions between accounts.
 - `POST /transfers` - makes a transfer from one `Account` to another.
 
 ## Run locally
-`docker-compose build`
-`docker-compose up`
+First, set the environment variables by creating a .env in the root of the project (you can use `.env_template`).
+After, run `docker-compose up --build`
