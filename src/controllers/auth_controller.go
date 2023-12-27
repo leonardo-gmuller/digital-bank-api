@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -25,27 +24,27 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	creds := &Credentials{}
 	err := json.NewDecoder(r.Body).Decode(creds)
 	if err != nil {
-		// If there is something wrong with the request body, return a 400 status
 		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, "Internal error.")
 		return
 	}
+
 	account := &models.Account{}
 	result := database.DB.First(&account, "cpf = ?", creds.Cpf)
 	if result.Error != nil {
-		// If there is an issue with the database, return a 500 error
 		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(w, "Username not found.")
 		return
 	}
-	if err = bcrypt.CompareHashAndPassword([]byte(account.GetPassword()), []byte(creds.Password)); err != nil {
-		// If the two passwords don't match, return a 401 status
+	if err = bcrypt.CompareHashAndPassword([]byte(account.Secret), []byte(creds.Password)); err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Errorf("Nao autorizado")
+		fmt.Fprint(w, "Not authorized.")
 		return
 	}
 	tokenString, err := createToken(creds.Cpf)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Errorf("No username found")
+		fmt.Fprint(w, "Internal error.")
 	}
 	w.WriteHeader(http.StatusOK)
 
@@ -54,7 +53,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	payload, err := response.MarshalJSON()
 	if err != nil {
-		log.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(w, "Internal error.")
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(payload)
