@@ -27,6 +27,14 @@ This is a basic API that performs transactions between accounts.
 `routes`: endpoints for API
 
 
-### Run locally
+## Endpoints description
+- `GET /accounts` - get a list of accounts
+- `GET /accounts/{account_id}/balance` - get account balance
+- `POST /accounts` - create an `Account`
+- `POST /login` - authentic the user
+- `GET /transfers` - gets the authenticated user's transfer list.
+- `POST /transfers` - makes a transfer from one `Account` to another.
+
+## Run locally
 `docker-compose build`
 `docker-compose up`
