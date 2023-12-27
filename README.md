@@ -28,4 +28,5 @@ This is a basic API that performs transactions between accounts.
 
 
 ### Run locally
-`docker compose up`
+`docker-compose build`
+`docker-compose up`
