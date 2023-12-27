@@ -10,7 +10,7 @@ import (
 type Account struct {
 	gorm.Model
 	Name    string
-	Cpf     string
+	Cpf     string `json:"password,omitempty"`
 	Secret  string `json:"password,omitempty"`
 	Balance int
 }
