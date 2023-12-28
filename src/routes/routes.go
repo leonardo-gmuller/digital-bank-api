@@ -21,5 +21,6 @@ func HandleRequest() {
 	s2.HandleFunc("", controllers.GetTransfers).Methods("GET")
 	s2.HandleFunc("", controllers.NewTransfer).Methods("POST")
 	s2.Use(middleware.ProtectedHandler)
+	r.Use(middleware.ContentTypeApplicationJsonMiddleware)
 	log.Fatal(http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 }

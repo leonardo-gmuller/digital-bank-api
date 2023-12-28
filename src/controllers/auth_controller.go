@@ -16,8 +16,8 @@ import (
 var jwtKey = []byte("my_secret_key")
 
 type Credentials struct {
-	Password string `json:"password", db:"password"`
-	Cpf      string `json:"cpf", db:"cpf"`
+	Password string `json:"password"`
+	Cpf      string `json:"cpf"`
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +41,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "Not authorized.")
 		return
 	}
-	tokenString, err := createToken(creds.Cpf)
+	tokenString, err := createToken(account.ID)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "Internal error.")
@@ -56,16 +56,15 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "Internal error.")
 	}
-	w.Header().Set("Content-Type", "application/json")
 	w.Write(payload)
 	return
 }
 
-func createToken(username string) (string, error) {
+func createToken(user uint) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
 		jwt.MapClaims{
-			"username": username,
-			"exp":      time.Now().Add(time.Hour * 24).Unix(),
+			"user": user,
+			"exp":  time.Now().Add(time.Hour * 24).Unix(),
 		})
 
 	tokenString, err := token.SignedString(jwtKey)

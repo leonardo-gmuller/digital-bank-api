@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/LeonardoMuller13/digital-bank-api/src/database"
-	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"github.com/golang-jwt/jwt/v5"
 )
 
 var secretKey = []byte("my_secret_key")
+
+type User struct {
+	ID interface{}
+}
 
 func ProtectedHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -30,15 +32,11 @@ func ProtectedHandler(next http.Handler) http.Handler {
 			return
 		}
 		if claims != nil {
-			if r.Context().Value("account") == nil {
-				account := &models.Account{}
-				result := database.DB.First(&account, "cpf = ?", claims["username"])
-				if result.Error != nil {
-					// If there is an issue with the database, return a 500 error
-					w.WriteHeader(http.StatusInternalServerError)
-					return
+			if r.Context().Value(User{}) == nil {
+				user := User{
+					ID: claims["user"],
 				}
-				r = r.WithContext(context.WithValue(r.Context(), "account", account))
+				r = r.WithContext(context.WithValue(r.Context(), User{}, user))
 			}
 		}
 		next.ServeHTTP(w, r)

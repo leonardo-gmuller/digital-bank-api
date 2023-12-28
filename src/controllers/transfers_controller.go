@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/LeonardoMuller13/digital-bank-api/src/database"
+	"github.com/LeonardoMuller13/digital-bank-api/src/middleware"
 	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"github.com/bitly/go-simplejson"
 )
@@ -17,8 +18,7 @@ type RequestTransfer struct {
 
 func GetTransfers(w http.ResponseWriter, r *http.Request) {
 	var t []models.Transfer
-	accountOrigin := r.Context().Value("account").(*models.Account)
-	result := database.DB.Find(&t, "account_origin_id = ?", accountOrigin.ID)
+	result := database.DB.Find(&t, "account_origin_id = ?", r.Context().Value(middleware.User{}).(middleware.User).ID)
 	if result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "Account not found.")
@@ -40,10 +40,15 @@ func NewTransfer(w http.ResponseWriter, r *http.Request) {
 
 	newRequest := &RequestTransfer{}
 	json.NewDecoder(r.Body).Decode(&newRequest)
-	accountOrigin := r.Context().Value("account").(*models.Account)
+	var accountOrigin models.Account
+	result := database.DB.First(&accountOrigin, r.Context().Value(middleware.User{}).(middleware.User).ID)
+	if result.Error != nil {
+		fail(http.StatusInternalServerError, "Account origin not found.")
+		return
+	}
 
 	var accountDestination models.Account
-	result := database.DB.First(&accountDestination, "cpf = ?", newRequest.Account_Destination_CPF)
+	result = database.DB.First(&accountDestination, "cpf = ?", newRequest.Account_Destination_CPF)
 	if result.Error != nil {
 		fail(http.StatusInternalServerError, "Account destination not found.")
 		return
@@ -72,7 +77,6 @@ func NewTransfer(w http.ResponseWriter, r *http.Request) {
 		fail(http.StatusInternalServerError, "Internal error.")
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
 	w.Write(payload)
 
 	tx.Commit()

@@ -11,27 +11,27 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type RequestNewAccount struct {
+type requestNewAccount struct {
 	Name   string
 	Cpf    string
 	Secret string
 }
 
-type ResponseAccount struct {
+type responseAccount struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 	Cpf  string `json:"cpf"`
 }
 
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
-	var ac []models.Account
-	database.DB.Find(&ac)
+	var ac []responseAccount
+	database.DB.Model(&models.Account{}).Find(&ac)
 	json.NewEncoder(w).Encode(ac)
 }
 
 func NewAccount(w http.ResponseWriter, r *http.Request) {
 	var account models.Account
-	var creds RequestNewAccount
+	var creds requestNewAccount
 	json.NewDecoder(r.Body).Decode(&creds)
 	if !helpers.CPFIsValid(creds.Cpf) {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -57,7 +57,7 @@ func GetAccountBalanceByID(w http.ResponseWriter, r *http.Request) {
 	id := vars["account_id"]
 	var a models.Account
 	result := database.DB.First(&a, id)
-	if result.Error == nil {
+	if result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, "Account not found.")
 		return
