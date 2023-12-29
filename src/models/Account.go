@@ -10,8 +10,8 @@ import (
 
 type Account struct {
 	ID        uint           `gorm:"primaryKey" json:"id"`
-	Name      string         `json:"name"`
-	Cpf       string         `json:"cpf"`
+	Name      string         `json:"name" validate:"nonzero"`
+	Cpf       string         `json:"cpf" validate:"len=11, regexp=^[0-9]*$"`
 	Secret    string         `json:"-"`
 	Balance   int            `json:"balance, omitempty"`
 	CreatedAt time.Time      `json:"created_at, omitempty"`

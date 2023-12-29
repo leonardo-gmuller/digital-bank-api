@@ -1,11 +1,11 @@
 # GO Digital Bank API
 This is a basic API that performs transactions between accounts.
 
-## Built and running with:
+## Built and Running with:
 - Go
 - Docker
 
-## Folders structure
+## Folders Structure
 
 📦src<br>
  ┣ 📂controllers<br>
@@ -27,7 +27,7 @@ This is a basic API that performs transactions between accounts.
 `routes`: endpoints for API
 
 
-## Endpoints description
+## Endpoints
 - `GET /accounts` - get a list of accounts
 - `GET /accounts/{account_id}/balance` - get account balance
 - `POST /accounts` - create an `Account`
@@ -35,6 +35,13 @@ This is a basic API that performs transactions between accounts.
 - `GET /transfers` - gets the authenticated user's transfer list.
 - `POST /transfers` - makes a transfer from one `Account` to another.
 
-## Run locally
+## Run Locally
 First, set the environment variables by creating a .env in the root of the project (you can use `.env_template`).
-After, run `docker-compose up --build`
+
+Run `docker-compose up --build`
+
+## Run Tests
+
+Check if you have Postgres running on your machine and check the environment variables to connect to the database you want to run the tests on.
+
+For test routes of accounts `go test -v src/tests/accounts_test.go`
