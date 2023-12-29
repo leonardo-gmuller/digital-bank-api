@@ -54,9 +54,9 @@ func TestNewAccountHandler(t *testing.T) {
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "12345678901",
-		Secret:  "123456",
 		Balance: 1000,
 	}
+	account.SetPassword("123456")
 	data, err := json.Marshal(account)
 	if err != nil {
 		t.Fatal(err)

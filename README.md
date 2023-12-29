@@ -44,4 +44,7 @@ Run `docker-compose up --build`
 
 Check if you have Postgres running on your machine and check the environment variables to connect to the database you want to run the tests on.
 
-For test routes of accounts `go test -v src/tests/accounts_test.go`
+- For test account `go test -v src/tests/model_account_test.go`
+- For test routes of accounts `go test -v src/tests/accounts_test.go`
+- For test routes of transfers `go test -v src/tests/transfers_test.go`
+- For test route of login `go test -v src/tests/login_test.go`
