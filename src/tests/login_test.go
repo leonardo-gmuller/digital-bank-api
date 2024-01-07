@@ -24,7 +24,8 @@ type LoginResponse struct {
 }
 
 func TestLogin(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "12345678901",
@@ -32,8 +33,6 @@ func TestLogin(t *testing.T) {
 	}
 	account.SetPassword("123456")
 	database.DB.Create(&account)
-
-	defer DeleteAccounts()
 
 	login := LoginRequest{
 		Cpf:      account.Cpf,

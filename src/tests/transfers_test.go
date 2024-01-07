@@ -50,7 +50,8 @@ func login(account models.Account) (string, error) {
 }
 
 func TestGetTransfersHandler(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "12345678901",
@@ -58,8 +59,6 @@ func TestGetTransfersHandler(t *testing.T) {
 	}
 	account.SetPassword(passwordDefault)
 	database.DB.Create(&account)
-
-	defer DeleteAccounts()
 
 	token, err := login(account)
 	if err != nil {
@@ -79,7 +78,6 @@ func TestGetTransfersHandler(t *testing.T) {
 }
 
 func newTransfer() (httptest.ResponseRecorder, error) {
-	database.ConnectDB()
 	accountOrigin := models.Account{
 		Name:    "Teste 1",
 		Cpf:     "12345678901",
@@ -125,6 +123,8 @@ func newTransfer() (httptest.ResponseRecorder, error) {
 }
 
 func TestNewTransfersHandler(t *testing.T) {
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 	response, err := newTransfer()
 	if err != nil {
 		t.Fatal(err)

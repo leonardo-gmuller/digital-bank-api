@@ -3,12 +3,12 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
 
+	"github.com/LeonardoMuller13/digital-bank-api/src/config"
 	"github.com/golang-jwt/jwt/v5"
 )
-
-var secretKey = []byte("my_secret_key")
 
 type User struct {
 	ID interface{}
@@ -44,6 +44,11 @@ func ProtectedHandler(next http.Handler) http.Handler {
 }
 
 func verifyToken(tokenString string) (error, jwt.MapClaims) {
+	cfg, err := config.Load()
+	if err != nil {
+		log.Fatalf("failed to load configurations: %v", err)
+	}
+	secretKey := []byte(cfg.JwtSecretKey)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})

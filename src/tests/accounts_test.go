@@ -34,10 +34,9 @@ func DeleteAccounts() {
 }
 
 func TestGetAccountsHandler(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 	NewAccountMock()
-
-	defer DeleteAccounts()
 
 	req, _ := http.NewRequest("GET", "/accounts", nil)
 	response := httptest.NewRecorder()
@@ -50,7 +49,9 @@ func TestGetAccountsHandler(t *testing.T) {
 }
 
 func TestNewAccountHandler(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
+
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "12345678901",
@@ -61,8 +62,6 @@ func TestNewAccountHandler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	defer DeleteAccounts()
 
 	req, _ := http.NewRequest("POST", "/accounts", bytes.NewBuffer(data))
 	response := httptest.NewRecorder()
@@ -78,10 +77,10 @@ func TestNewAccountHandler(t *testing.T) {
 }
 
 func TestGetAccountBalanceByIDHandler(t *testing.T) {
-	database.ConnectDB()
-	NewAccountMock()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 
-	defer DeleteAccounts()
+	NewAccountMock()
 
 	req, _ := http.NewRequest("GET", "/accounts/"+strconv.Itoa(ID)+"/balance", nil)
 	response := httptest.NewRecorder()
@@ -95,7 +94,9 @@ func TestGetAccountBalanceByIDHandler(t *testing.T) {
 }
 
 func TestNewAccountIfCpfIsNotValidHandler(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
+
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "02345678905",
@@ -106,7 +107,6 @@ func TestNewAccountIfCpfIsNotValidHandler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer DeleteAccounts()
 
 	req, _ := http.NewRequest("POST", "/accounts", bytes.NewBuffer(data))
 	response := httptest.NewRecorder()
@@ -119,7 +119,9 @@ func TestNewAccountIfCpfIsNotValidHandler(t *testing.T) {
 	assert.Equal(t, "CPF is not valid.", response.Body.String())
 }
 func TestNewAccountIfAccountAlreadyExistsHandler(t *testing.T) {
-	database.ConnectDB()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
+
 	account := models.Account{
 		Name:    "Teste",
 		Cpf:     "12345678901",
@@ -130,7 +132,6 @@ func TestNewAccountIfAccountAlreadyExistsHandler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer DeleteAccounts()
 
 	req, _ := http.NewRequest("POST", "/accounts", bytes.NewBuffer(data))
 	response := httptest.NewRecorder()
@@ -147,10 +148,10 @@ func TestNewAccountIfAccountAlreadyExistsHandler(t *testing.T) {
 }
 
 func TestGetAccountBalanceByIDIfNotFoundHandler(t *testing.T) {
-	database.ConnectDB()
-	NewAccountMock()
+	teardownSuite := setupSuite(t)
+	defer teardownSuite(t)
 
-	defer DeleteAccounts()
+	NewAccountMock()
 
 	req, _ := http.NewRequest("GET", "/accounts/0/balance", nil)
 	response := httptest.NewRecorder()

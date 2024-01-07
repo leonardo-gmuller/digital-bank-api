@@ -1,11 +1,8 @@
 package database
 
 import (
-	"log"
-	"os"
-
+	"github.com/LeonardoMuller13/digital-bank-api/src/config"
 	"github.com/LeonardoMuller13/digital-bank-api/src/models"
-	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -15,17 +12,12 @@ var (
 	err error
 )
 
-func ConnectDB() {
-	err := godotenv.Load("../../.env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %s", err)
-	}
-
-	connection := "host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") + " password=" + os.Getenv("DB_PASSWORD") + " dbname=" + os.Getenv("DB_NAME") + " port=" + os.Getenv("DB_PORT") + " sslmode=disable"
+func ConnectDB(config config.Postgres) error {
+	connection := "host=" + config.Host + " user=" + config.User + " password=" + config.Password + " dbname=" + config.DatabaseName + " port=" + config.Port + " sslmode=disable"
 	DB, err = gorm.Open(postgres.Open(connection))
 
 	if err != nil {
-		log.Panic("Erro ao conectar com o banco de dados.")
+		return err
 	}
 
 	if !DB.Migrator().HasTable(&models.Account{}) {
@@ -34,4 +26,5 @@ func ConnectDB() {
 	if !DB.Migrator().HasTable(&models.Transfer{}) {
 		DB.Migrator().CreateTable(&models.Transfer{})
 	}
+	return nil
 }

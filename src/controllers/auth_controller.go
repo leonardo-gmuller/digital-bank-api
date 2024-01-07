@@ -3,17 +3,17 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
+	"github.com/LeonardoMuller13/digital-bank-api/src/config"
 	"github.com/LeonardoMuller13/digital-bank-api/src/database"
 	"github.com/LeonardoMuller13/digital-bank-api/src/models"
 	"github.com/bitly/go-simplejson"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
-
-var jwtKey = []byte("my_secret_key")
 
 type Credentials struct {
 	Password string `json:"password"`
@@ -66,6 +66,12 @@ func createToken(user uint) (string, error) {
 			"user": user,
 			"exp":  time.Now().Add(time.Hour * 24).Unix(),
 		})
+
+	cfg, err := config.Load()
+	if err != nil {
+		log.Fatalf("failed to load configurations: %v", err)
+	}
+	jwtKey := []byte(cfg.JwtSecretKey)
 
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
