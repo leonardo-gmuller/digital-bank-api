@@ -6,7 +6,9 @@ This is a basic API that performs transactions between accounts.
 - Docker
 
 ## Folders Structure
-
+📦build<br>
+┣ 🐳docker-compose.yml<br>
+┗ 🐳Dockerfile<br>
 📦src<br>
  ┣ 📂controllers<br>
  ┣ 📂database<br>
