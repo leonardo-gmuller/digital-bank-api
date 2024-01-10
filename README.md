@@ -39,28 +39,10 @@ This is a basic API that performs transactions between accounts.
 
 ## Run Locally
 First, set the environment variables (you can use `.env_template`), don't forget to configure a Postgres database.
-```Bash
-export ENVIRONMENT=local
-export DEVELOPMENT=true
-
-export DB_HOST=postgresdb
-export DB_DRIVER=postgres
-export DB_USER=root
-export DB_PASSWORD=root
-export DB_NAME=postgres
-export DB_PORT=5432
-
-export JWT_SECRET=my-secret-key`
-```
 
 ## Run Tests
 
 Check if you have Postgres running on your machine and check the environment variables to connect to the database you want to run the tests on.
-
-- For test account: `go test -v src/tests/model_account_test.go`
-- For test routes of accounts: `go test -v src/tests/accounts_test.go`
-- For test routes of transfers: `go test -v src/tests/transfers_test.go`
-- For test route of login: `go test -v src/tests/login_test.go`
 
 ## Build
  Go to build folder:
