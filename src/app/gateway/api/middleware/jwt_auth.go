@@ -6,13 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/LeonardoMuller13/digital-bank-api/src/config"
+	"github.com/LeonardoMuller13/digital-bank-api/src/app/config"
+	"github.com/LeonardoMuller13/digital-bank-api/src/app/domain/dto"
 	"github.com/golang-jwt/jwt/v5"
 )
-
-type User struct {
-	ID interface{}
-}
 
 func ProtectedHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -32,11 +29,11 @@ func ProtectedHandler(next http.Handler) http.Handler {
 			return
 		}
 		if claims != nil {
-			if r.Context().Value(User{}) == nil {
-				user := User{
+			if r.Context().Value(dto.User{}) == nil {
+				user := dto.User{
 					ID: claims["user"],
 				}
-				r = r.WithContext(context.WithValue(r.Context(), User{}, user))
+				r = r.WithContext(context.WithValue(r.Context(), dto.User{}, user))
 			}
 		}
 		next.ServeHTTP(w, r)
@@ -44,7 +41,7 @@ func ProtectedHandler(next http.Handler) http.Handler {
 }
 
 func verifyToken(tokenString string) (error, jwt.MapClaims) {
-	cfg, err := config.Load()
+	cfg, err := config.New()
 	if err != nil {
 		log.Fatalf("failed to load configurations: %v", err)
 	}
