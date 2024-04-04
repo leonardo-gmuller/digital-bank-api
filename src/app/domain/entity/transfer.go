@@ -1,4 +1,4 @@
-package models
+package entity
 
 import (
 	"time"
@@ -15,5 +15,3 @@ type Transfer struct {
 	UpdatedAt            time.Time      `json:"updated_at, omitempty"`
 	DeletedAt            gorm.DeletedAt `gorm:"index";json:"deleted_at, omitempty"`
 }
-
-var Transfers []Transfer

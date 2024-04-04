@@ -12,16 +12,6 @@
       "envFile": "${workspaceFolder}/.env",
       "program": "${workspaceFolder}/src",
       "cwd": "${workspaceFolder}",
-    },
-    {
-        "name": "Digital Bank (TEST)",
-        "type": "go",
-        "request": "launch",
-        "mode": "test",
-        "envFile": "${workspaceFolder}/.env",
-        "program": "${workspaceFolder}/src/tests",
-        "cwd": "${workspaceFolder}",
-        "showLog": true
-      }
+    }
   ]
 }
