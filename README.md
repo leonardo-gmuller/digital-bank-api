@@ -11,11 +11,11 @@ This is a basic API that performs transactions between accounts.
 ┗ 🐳Dockerfile<br>
 📦src<br>
  ┣ 📂app<br>
-   ┣ config<br>
-   ┣ domain<br>
-   ┣ gateway<br>
-   ┣ helpers<br>
-   ┣ resource<br>
+   ┣ 📂config<br>
+   ┣ 📂domain<br>
+   ┣ 📂gateway<br>
+   ┣ 📂helpers<br>
+   ┣ 📂resource<br>
  ┗ 📜server.go<br>
 
  
