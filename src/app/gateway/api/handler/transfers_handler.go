@@ -16,7 +16,7 @@ const (
 )
 
 func (h *Handler) TransfersSetup(router chi.Router) {
-	router = router.With(middleware.ProtectedHandler)
+	router = router.With(middleware.ProtectedHandler(h.cfg.JwtSecretKey))
 	router.Route(transfersPattern, func(r chi.Router) {
 		r.Get("/", h.getTransfers())
 		r.Post("/", h.newTransfer())
