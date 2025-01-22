@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "envconfig",
-        "gomock"
+        "gomock",
+        "stretchr",
+        "uber",
+        "usecases"
     ]
 }

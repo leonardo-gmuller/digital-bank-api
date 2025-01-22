@@ -79,7 +79,7 @@ func TestCreateTransfer_UserNotFound(t *testing.T) {
 
 	defer suit.ctrl.Finish()
 
-	accountOrigin := entity.Account{ID: 1, Cpf: "11111111111", Balance: 1000}
+	accountOrigin := entity.Account{ID: 1}
 	accountDest := entity.Account{ID: 2, Cpf: input.AccountDestinationCPF, Balance: 2000}
 
 	ctx := context.WithValue(context.Background(), dto.UserKey, &dto.User{ID: int(accountOrigin.ID)})
