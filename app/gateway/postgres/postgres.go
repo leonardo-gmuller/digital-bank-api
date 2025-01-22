@@ -12,7 +12,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/jackc/pgx/v5/stdlib"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/config"
+	"github.com/leonardo-gmuller/digital-bank-api/app/config"
 )
 
 //go:embed migrations

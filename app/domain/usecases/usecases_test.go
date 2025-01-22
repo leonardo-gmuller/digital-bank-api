@@ -5,8 +5,8 @@ import (
 
 	"go.uber.org/mock/gomock"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/usecases"
-	"github.com/LeonardoMuller13/digital-bank-api/app/tests/mocks"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/usecases"
+	"github.com/leonardo-gmuller/digital-bank-api/app/tests/mocks"
 )
 
 type MockSuit struct {

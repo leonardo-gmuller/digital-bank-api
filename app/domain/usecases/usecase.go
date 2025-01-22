@@ -3,8 +3,8 @@ package usecases
 import (
 	"context"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres/repositories"
-	"github.com/LeonardoMuller13/digital-bank-api/app/pkg/uow"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres/repositories"
+	"github.com/leonardo-gmuller/digital-bank-api/app/pkg/uow"
 )
 
 type UseCase struct {

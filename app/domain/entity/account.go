@@ -6,8 +6,8 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
-	"github.com/LeonardoMuller13/digital-bank-api/app/pkg/validations"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/pkg/validations"
 )
 
 type Account struct {

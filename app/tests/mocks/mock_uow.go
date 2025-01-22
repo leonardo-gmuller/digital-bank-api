@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	uow "github.com/LeonardoMuller13/digital-bank-api/app/pkg/uow"
+	uow "github.com/leonardo-gmuller/digital-bank-api/app/pkg/uow"
 	gomock "go.uber.org/mock/gomock"
 )
 

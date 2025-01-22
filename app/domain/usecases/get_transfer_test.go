@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
 )
 
 func TestListUserTransfer_Success(t *testing.T) {

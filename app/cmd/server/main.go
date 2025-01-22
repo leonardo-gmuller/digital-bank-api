@@ -13,10 +13,10 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app"
-	"github.com/LeonardoMuller13/digital-bank-api/app/config"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/api"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres"
+	"github.com/leonardo-gmuller/digital-bank-api/app"
+	"github.com/leonardo-gmuller/digital-bank-api/app/config"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/api"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres"
 )
 
 func main() {

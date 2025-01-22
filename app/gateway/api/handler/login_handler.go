@@ -7,11 +7,11 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/usecases"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/api/handler/schema"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/api/rest"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/api/rest/response"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/usecases"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/api/handler/schema"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/api/rest"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/api/rest/response"
 )
 
 const (

@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/entity"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/entity"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
 )
 
 func TestListAccount_Success(t *testing.T) {

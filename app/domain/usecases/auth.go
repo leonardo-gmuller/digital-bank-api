@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/jwtauth"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
 )
 
 type AuthInput struct {

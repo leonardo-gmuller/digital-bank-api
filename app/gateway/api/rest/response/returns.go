@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/resource"
+	"github.com/leonardo-gmuller/digital-bank-api/app/resource"
 )
 
 type Response struct { //nolint:errname

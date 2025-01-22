@@ -5,7 +5,7 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres"
 )
 
 type RepositoryFactory func(tx pgx.Tx) interface{}

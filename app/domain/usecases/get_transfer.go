@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
 )
 
 type OutputListTransfer struct {

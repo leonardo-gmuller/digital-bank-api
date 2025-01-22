@@ -5,12 +5,12 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/config"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/usecases"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres/repositories"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres/sqlc"
-	"github.com/LeonardoMuller13/digital-bank-api/app/pkg/uow"
+	"github.com/leonardo-gmuller/digital-bank-api/app/config"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/usecases"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres/repositories"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres/sqlc"
+	"github.com/leonardo-gmuller/digital-bank-api/app/pkg/uow"
 )
 
 type App struct {

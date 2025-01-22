@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres/sqlc"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres/sqlc"
 )
 
 func (r *TransfersRepository) Create(ctx context.Context, accountOriginID int, accountDestinationID int, amount int) error {

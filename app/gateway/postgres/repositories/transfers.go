@@ -3,9 +3,9 @@ package repositories
 import (
 	"context"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres"
-	"github.com/LeonardoMuller13/digital-bank-api/app/gateway/postgres/sqlc"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres"
+	"github.com/leonardo-gmuller/digital-bank-api/app/gateway/postgres/sqlc"
 )
 
 type TransfersRepositoryInterface interface {

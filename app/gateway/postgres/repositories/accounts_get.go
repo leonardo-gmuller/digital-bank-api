@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/entity"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/entity"
 )
 
 func (r *AccountRepository) GetAccountByID(ctx context.Context, id int64) (entity.Account, error) {

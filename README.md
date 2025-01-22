@@ -38,7 +38,7 @@ Digital-Bank-API is a example of web application designed to manage banking oper
 ## Installation
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/leonardo-gmuller/digital-bank-api
+   git clone github.com/leonardo-gmuller/digital-bank-api
    cd digital-bank-api
    ```
 

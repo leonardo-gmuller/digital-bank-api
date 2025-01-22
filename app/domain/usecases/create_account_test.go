@@ -9,10 +9,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/entity"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/usecases"
-	"github.com/LeonardoMuller13/digital-bank-api/app/pkg/uow"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/entity"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/usecases"
+	"github.com/leonardo-gmuller/digital-bank-api/app/pkg/uow"
 )
 
 func TestCreateAccount_Success(t *testing.T) {

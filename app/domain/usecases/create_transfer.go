@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/dto"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
-	"github.com/LeonardoMuller13/digital-bank-api/app/pkg/uow"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/dto"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/erring"
+	"github.com/leonardo-gmuller/digital-bank-api/app/pkg/uow"
 )
 
 type InputCreateTransfer struct {

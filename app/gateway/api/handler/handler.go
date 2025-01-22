@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/config"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/usecases"
+	"github.com/leonardo-gmuller/digital-bank-api/app/config"
+	"github.com/leonardo-gmuller/digital-bank-api/app/domain/usecases"
 )
 
 type Handler struct {
