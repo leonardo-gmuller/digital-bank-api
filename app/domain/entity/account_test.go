@@ -3,14 +3,16 @@ package entity_test
 import (
 	"testing"
 
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/entity"
-	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.org/x/crypto/bcrypt"
+
+	"github.com/LeonardoMuller13/digital-bank-api/app/domain/entity"
+	"github.com/LeonardoMuller13/digital-bank-api/app/domain/erring"
 )
 
-func TestAccount_SetPassword(t *testing.T) {
+func TestAccount_SetPassword(t *testing.T) { //nolint:paralleltest
 	account := &entity.Account{}
 	password := "newpassword123"
 
@@ -22,7 +24,7 @@ func TestAccount_SetPassword(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestAccount_ValidatePassword(t *testing.T) {
+func TestAccount_ValidatePassword(t *testing.T) { //nolint:paralleltest
 	validPassword := "secret123"
 	account := &entity.Account{}
 	account.SetPassword(validPassword)
@@ -36,7 +38,7 @@ func TestAccount_ValidatePassword(t *testing.T) {
 		{"invalid password", "wrongpassword", false},
 	}
 
-	for _, tt := range tests {
+	for _, tt := range tests { //nolint:paralleltest
 		t.Run(tt.name, func(t *testing.T) {
 			result := account.ValidatePassword(tt.password)
 			assert.Equal(t, tt.expected, result)
@@ -45,6 +47,8 @@ func TestAccount_ValidatePassword(t *testing.T) {
 }
 
 func TestAccount_IsValid(t *testing.T) {
+	t.Parallel()
+
 	account := &entity.Account{
 		Cpf: "12345678901",
 	}
@@ -55,6 +59,8 @@ func TestAccount_IsValid(t *testing.T) {
 }
 
 func TestAccount_Deposit(t *testing.T) {
+	t.Parallel()
+
 	account := &entity.Account{Balance: 1000}
 
 	tests := []struct {
@@ -68,12 +74,14 @@ func TestAccount_Deposit(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			err := account.Deposit(tt.amount)
 
 			if tt.wantErr {
 				assert.Error(t, err)
 			} else {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, account.Balance, 1000+tt.amount)
 			}
 		})
@@ -81,6 +89,8 @@ func TestAccount_Deposit(t *testing.T) {
 }
 
 func TestAccount_Transfer(t *testing.T) {
+	t.Parallel()
+
 	account1 := &entity.Account{Balance: 1000}
 	account2 := &entity.Account{Balance: 500}
 
@@ -97,14 +107,16 @@ func TestAccount_Transfer(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			err := account1.Transfer(tt.amount, account2)
 
 			if tt.wantErr {
 				assert.Error(t, err)
 			} else {
-				assert.NoError(t, err)
-				assert.Equal(t, account1.Balance, tt.expectedBalance1)
-				assert.Equal(t, account2.Balance, tt.expectedBalance2)
+				require.NoError(t, err)
+				assert.Equal(t, tt.expectedBalance1, account1.Balance)
+				assert.Equal(t, tt.expectedBalance2, account2.Balance)
 			}
 		})
 	}
