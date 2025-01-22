@@ -1,54 +1,80 @@
-# GO Digital Bank API
-This is a basic API that performs transactions between accounts.
+# Digital-Bank-API
 
-## Built and Running with:
-- Go
-- Docker
+Digital-Bank-API is a example of web application designed to manage banking operations, clients, transactions, and ensure secure access. The application follows a *clean architecture* approach to ensure maintainability and scalability.
+
+## Tech Stack
+
+- **Go**: Backend is built using Go.
+- **Chi Router**: Lightweight and fast HTTP router.
+- **Golang-Migrate**: For database migrations.
+- **JWT**: Authentication middleware using JSON Web Tokens.
+
+
 
 ## Folders Structure
-📦build<br>
-┣ 🐳docker-compose.yml<br>
-┗ 🐳Dockerfile<br>
-📦src<br>
- ┣ 📂app<br>
-   ┣ 📂config<br>
-   ┣ 📂domain<br>
-   ┣ 📂gateway<br>
-   ┣ 📂helpers<br>
-   ┣ 📂resource<br>
- ┗ 📜server.go<br>
+
+- `build`: files for build
+    - `docker-compose.yaml`
+    - `Dockerfile`
+- `app`
+    - `cmd`
+        - `server`: main file
+    - `config`: configure environment
+    - `domain`: domain related, including entities, usecases, dto
+    - `gateway`
+        - `api`: api handlers, middlewares
+        - `postgres`: DB connection and repositories
+    - `pkg`: open library
+    - `resources`: resources for API
+    - `tests`
+        - `mocks`: mocks for tests
+- `local`
+    - `docker-compose.yaml`: For development
+- `tests`: http files to help run tests
+
 
  
-`config`: configure environment
 
-`domain`: domain related, including entities, usecases, dto
+## Installation
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/leonardo-gmuller/digital-bank-api
+   cd digital-bank-api
+   ```
 
-`gateway`: api handlers, middlewares and repositories
+2. Install dependencies
+    ```bash
+    go mod tidy
+    ```
 
-`helpers`: functions helpers
+## Start
+#### Requirements
+Make sure you have the following software installed:
 
-`resource`: resources for API
+- [Go](https://go.dev/doc/install)<br>
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Golang-migrate](https://github.com/golang-migrate/migrate/)
+- [Makefile](https://www.gnu.org/software/make/manual/make.html)
 
+To help with the startup, I recommend you use make:
+- For development:
+```bash
+make start-local
+```
+
+- For build:
+```bash
+make start-build
+```
 
 ## Endpoints
+Prefix: `http://localhost:8000`
 - `GET /accounts` - get a list of accounts
 - `GET /accounts/{account_id}/balance` - get account balance
 - `POST /accounts` - create an `Account`
 - `POST /auth` - authentic the user
 - `GET /transfers` - gets the authenticated user's transfer list.
 - `POST /transfers` - makes a transfer from one `Account` to another.
-
-## Run Locally
-First, set the environment variables (you can use `.env_template`), don't forget to configure a Postgres database.
-
-
-## Build
- Go to build folder:
-
- `cd build`
-
- Run docker-compose with build flag:
-
- `docker-compose up -d --build`
 
 
