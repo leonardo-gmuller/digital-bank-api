@@ -10,7 +10,7 @@
       "request": "launch",
       "mode": "auto",
       "envFile": "${workspaceFolder}/.env",
-      "program": "${workspaceFolder}/src",
+      "program": "${workspaceFolder}/app/cmd/server",
       "cwd": "${workspaceFolder}",
     }
   ]

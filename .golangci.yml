@@ -1,0 +1,65 @@
+---
+run:
+  tests: true
+
+linters-settings:
+  exhaustive:
+    default-signifies-exhaustive: true
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(github.com)
+      - prefix(github.com/LeonardoMuller13/digital-bank-api)
+      - blank
+      - dot
+  goimports:
+    local-prefixes: github.com/LeonardoMuller13/digital-bank-api
+  misspell:
+    ignore-words:
+      - essencial
+  tagalign:
+    order:
+      - required
+      - envconfig
+      - json
+      - extensions
+      - validate
+      - example
+    sort: true
+  varnamelen:
+    ignore-decls:
+      - i int
+      - rw http.ResponseWriter
+      - w http.ResponseWriter
+      - r *http.Request
+    ignore-names:
+      - db
+      - fn
+      - id
+      - ok
+      - tc
+      - tt
+      - tx
+      - wg
+    ignore-type-assert-ok: true
+
+
+linters:
+  enable-all: true
+  disable:
+    - cyclop
+    - depguard
+    - dupl
+    - exhaustruct
+    - funlen
+    - gochecknoglobals
+    - godox
+    - err113
+    - ireturn
+    - lll
+    - maintidx
+    - tagliatelle
+    - testpackage
+    - gomnd #deprecated
+    - execinquery # deprecated

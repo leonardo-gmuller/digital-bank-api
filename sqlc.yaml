@@ -1,0 +1,13 @@
+version: "2"
+sql:
+- schema: "app/gateway/postgres/migrations"
+  queries: "app/gateway/postgres/queries"
+  engine: "postgresql"
+  gen:
+    go: 
+      package: "sqlc"
+      out: "app/gateway/postgres/sqlc"
+      sql_package: "pgx/v5"
+      overrides:
+      - db_type: "decimal"
+        go_type: "float64"

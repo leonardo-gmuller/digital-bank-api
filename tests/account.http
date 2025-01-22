@@ -1,0 +1,21 @@
+GET http://localhost:8000/api/v2/accounts HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+
+###
+POST http://localhost:8000/api/v2/accounts HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+{
+    "name":"Julia",
+    "cpf": "20652942059",
+    "secret": "1234567",
+    "balance": 1000
+}
+
+###
+GET http://localhost:8000/api/v2/accounts/1/balance HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json

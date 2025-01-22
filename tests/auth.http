@@ -1,0 +1,8 @@
+POST http://localhost:8000/api/v2/auth HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+{
+    "cpf": "84289415059",
+    "password": "1234567"
+}

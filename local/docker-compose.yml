@@ -1,0 +1,30 @@
+version: '3'
+services:
+  digital-bank_postgresdb:
+    image: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: digital_bank
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - digital-bank  
+
+  digital-bank_pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "email@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+    ports:
+      - "54321:80"
+    depends_on:
+      - digital-bank_postgresdb
+
+networks:
+  digital-bank:
+    driver: bridge

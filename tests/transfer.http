@@ -1,0 +1,15 @@
+GET http://localhost:8000/api/v2/transfers HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzc1MzU0MzQsInN1YiI6IjEifQ.msOu_HvIIMq9ETVPr4fvC5-SS8ZI31Wt8qNhf6qjl1E
+
+
+###
+POST http://localhost:8000/api/v2/transfers HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzc1MzU0MzQsInN1YiI6IjEifQ.msOu_HvIIMq9ETVPr4fvC5-SS8ZI31Wt8qNhf6qjl1E
+Content-Type: application/json
+
+{
+    "account_destination_cpf": "20652942059",
+    "amount": 100
+}
